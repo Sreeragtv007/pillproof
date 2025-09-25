@@ -7,7 +7,10 @@
     <h1>Upload Prescription and Medicine</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+       priscription
+       <input type="file" name="priscription">
+       medicine
+       <input type="file" name="medicine">
         <button type="submit">Verify</button>
     </form>
 </body>
