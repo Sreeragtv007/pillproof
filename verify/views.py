@@ -6,7 +6,6 @@ from .models import PrescriptionVerification
 from django.conf import settings
 import os
 import crewai
-from .agent import verify_prescription_crew
 
 
 
@@ -14,22 +13,21 @@ def upload_view(request):
     if request.method == 'POST':
         
         
-        priscription = request.FILE.get('priscription')
-        medicine = request.FILE.get('medicine')
+        priscription = request.FILES['priscription']
+        medicine = request.FILES['medicine']
         
         obj = PrescriptionVerification.objects.create(prescription_image=priscription,medicine_image=medicine)
         
-        
-        
+             
         
             
             
             
-        return redirect('result_view',)
+        return render(request,'result.html')
     else:
-        form = UploadForm()
+        
     
-    return render(request,'upload.html', {'form': form})
+        return render(request,'upload.html')
 
 def result_view(request, result):
     # This view will display the verification result.
