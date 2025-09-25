@@ -1,29 +1,61 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Verification Result</title>
-     <style>
-    .text-green {
-      color: #28a745; /* A nice shade of green */
-      font-weight: bold;
-    }
-    .text-red {
-      color: #dc3545; /* A nice shade of red */
-      font-weight: bold;
-    }
-  </style>
+    
 </head>
 <body>
     <h1>Verification Result</h1>
-     {% if "Verified" in result %}
-    <h3 class="text-green">verified</h3>
-  {% else %}
-    <p class="text-red">not verified</p>
-  {% endif %}
+    
      <p>{{ result }}</p>
 
     <br>
     <h4>**Precaution:** AI can make mistakes. Always double-check if you have doubt </h4>
     <a href="{% url 'upload_view' %}">Upload another set of images</a>
 </body>
+</html> -->
+
+
+
+
+{% load static %}
+  <html>
+    <head>
+            <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    </head>
+
+    <div class="container">
+
+        <div class="result-card verified">
+            <div class="result-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h1>Verified Successfully</h1>
+            <div class="reason-box">
+                <span class="reason-label">Reason:</span>
+                <span class="reason-code">MATCHED</span>
+            </div>
+            <hr>
+            <a href="/" class="back-btn">Verify Another Prescription</a>
+        </div>
+
+    </div>
+
+    <div class="container" style="padding-top: 0;"> <div class="result-card not-verified">
+            <div class="result-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </div>
+            <h1>Verification Failed</h1>
+            <div class="reason-box">
+                <span class="reason-label">Reason:</span>
+                <span class="reason-code">MISMATCH</span>
+            </div>
+            <hr>
+            <a href="/" class="back-btn">Try Again</a>
+        </div>
+
+    </div>
 </html>
+
+   

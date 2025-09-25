@@ -12,8 +12,9 @@ load_dotenv()
 GOOGLE_API_KEY = os.getenv("api_key")
 genai.configure(api_key=GOOGLE_API_KEY)
 
+
 def verify_medicine_with_prescription(prescription_image_path, medicine_image_path):
-   
+
     try:
         # --- Load Images ---
         prescription_img = PIL.Image.open(prescription_image_path)
@@ -26,13 +27,14 @@ def verify_medicine_with_prescription(prescription_image_path, medicine_image_pa
         # The prompt is a list containing text instructions and the images.
         prompt_parts = [
             "You are a pharmacy assistant. Your task is to verify if the medicine in the second image matches the medicine name written in the first image, which is a prescription.",
-            "Carefully read the prescription in the first image and identify the medicine.",
+            "Carefully read the prescription in the first image and identify the medicine's name.",
             "Then, look at the medicine packaging in the second image and read its name.",
             "Compare the two names.",
-            "respond with either 'Verified' or 'Not Verified' and provide a one-sentence which medicine are verified and explanation for your conclusion.",
-            "respose like medicien name : verified "
-            "finally as per priscription how much medicne is not verified and give the name "
-            
+            "Finally, respond with either 'Verified' or 'Not Verified' and provide a one-sentence explanation for your conclusion.",
+
+
+
+
             "Prescription Image: ",
             prescription_img,
             "\nMedicine Image: ",
@@ -48,4 +50,3 @@ def verify_medicine_with_prescription(prescription_image_path, medicine_image_pa
         return "Error: One or both image files were not found. Please check the file paths."
     except Exception as e:
         return f"An error occurred: {e}"
-
