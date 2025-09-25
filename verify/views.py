@@ -5,37 +5,34 @@ from .forms import UploadForm
 from .models import PrescriptionVerification
 from django.conf import settings
 import os
-import crewai
+# import crewai
 from .agent import verify_prescription_crew
-
+from .gemini_verify import verify_prescription_gemini
 
 
 def upload_view(request):
     if request.method == 'POST':
-        form = UploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            # Save the form data to the database, including the image files
-            verification_entry = form.save(commit=False)
-            
-            # CrewAI Integration
-            # The files are now saved, you can access their paths
-            prescription_path = verification_entry.prescription_image.path
-            medicine_path = verification_entry.medicine_image.path
-            
-            # Run the CrewAI verification
-            result = verify_prescription_crew(prescription_path, medicine_path)
-            
-            # Save the result to the model instance before committing
-            verification_entry.verification_result = result
-            verification_entry.save()
-            
-            return redirect('result_view', result=result)
+
+        prescription_file = request.FILES.get("priscription")
+        medicine_file = request.FILES.get("medicine")
+
+        obj = PrescriptionVerification.objects.create(
+            prescription_image=prescription_file, medicine_image=medicine_file)
+
+        # Run the CrewAI verification
+        result = verify_prescription_gemini(
+            obj.prescription_image.path, obj.medicine_image.path)
+
+        # Save the result to the model instance before committing
+        obj.verification_result = result
+        obj.save()
+        context = {"result": result}
+        return render(request, 'result.html', context)
     else:
-        form = UploadForm()
-    
-    return render(request,'upload.html', {'form': form})
 
-def result_view(request, result):
+        return render(request, 'upload.html')
+
+
+def result_view(request):
     # This view will display the verification result.
-    return render(request,'result.html', {'result': result})
-
+    return render(request, 'result.html')

@@ -1,13 +1,28 @@
 from crewai import Agent, Task, Crew, Process
-from crewai_tools import ImageAnalysisTool
+# from crewai_tools import ImageAnalysisTool
+from crewai_tools import VisionTool
 from langchain_google_genai import ChatGoogleGenerativeAI
 
+
 # --- Add your Gemini API key here ---
-GEMINI_API_KEY = ""
+GEMINI_API_KEY = "AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8"
 
 # Configure Gemini LLM (vision-enabled)
-llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash",   # or "gemini-1.5-pro" for more accuracy
+# llm = ChatGoogleGenerativeAI(
+#     model="gemini-1.5-flash",   # or "gemini-1.5-pro" for more accuracy
+#     temperature=0.2,
+#     google_api_key=GEMINI_API_KEY
+# )
+
+# llm1 = ChatGoogleGenerativeAI(
+#     # model="gemini-1.5-flash",
+#     model="google/gemini-1.5-flash",
+
+#     temperature=0.2,
+#     google_api_key=GEMINI_API_KEY
+# )
+llm1 = ChatGoogleGenerativeAI(
+    model="gemini-1.5-flash",  # <-- add "google/"
     temperature=0.2,
     google_api_key=GEMINI_API_KEY
 )
@@ -17,7 +32,7 @@ def verify_prescription_crew(prescription_path: str, medicine_path: str) -> str:
     Verify if a medicine bill/image matches a doctor's prescription using Gemini LLM with CrewAI.
     """
 
-    vision_tool = ImageAnalysisTool()
+    vision_tool = VisionTool()
 
     # Agent 1: Extract details from prescription
     prescription_analyst = Agent(
@@ -25,7 +40,7 @@ def verify_prescription_crew(prescription_path: str, medicine_path: str) -> str:
         goal='Extract medicine name, dosage, and frequency from a prescription image.',
         backstory="You are skilled at interpreting prescriptions, even messy handwriting.",
         tools=[vision_tool],
-        llm=llm,
+        llm=llm1,
         verbose=True
     )
 
@@ -35,7 +50,7 @@ def verify_prescription_crew(prescription_path: str, medicine_path: str) -> str:
         goal='Compare prescription details with the medicine bill/image.',
         backstory="You ensure the dispensed medicine matches exactly what was prescribed.",
         tools=[vision_tool],
-        llm=llm,
+        llm=llm1,
         verbose=True
     )
 
@@ -61,7 +76,7 @@ def verify_prescription_crew(prescription_path: str, medicine_path: str) -> str:
         agents=[prescription_analyst, medicine_verifier],
         tasks=[analyze_prescription_task, compare_and_verify_task],
         process=Process.sequential,  # run tasks in order
-        verbose=2
+        verbose=True
     )
 
     # Run the workflow
