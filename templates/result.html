@@ -2,13 +2,28 @@
 <html>
 <head>
     <title>Verification Result</title>
+     <style>
+    .text-green {
+      color: #28a745; /* A nice shade of green */
+      font-weight: bold;
+    }
+    .text-red {
+      color: #dc3545; /* A nice shade of red */
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
     <h1>Verification Result</h1>
-    <p>{{ result }}</p>
+     {% if "Verified" in result %}
+    <h3 class="text-green">verified</h3>
+  {% else %}
+    <p class="text-red">not verified</p>
+  {% endif %}
+     <p>{{ result }}</p>
 
     <br>
-    <h4>**Precaution:** AI can make mistakes. Always double-check the medication with a qualified pharmacist before dispensing.</h4>
+    <h4>**Precaution:** AI can make mistakes. Always double-check if you have doubt </h4>
     <a href="{% url 'upload_view' %}">Upload another set of images</a>
 </body>
 </html>

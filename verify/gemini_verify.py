@@ -1,9 +1,15 @@
 import google.generativeai as genai
 import PIL.Image
+import os
+from dotenv import load_dotenv
+
 
 # --- Configuration ---
 # Replace with your actual API key
-GOOGLE_API_KEY = 'AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8'
+load_dotenv()
+# GOOGLE_API_KEY = 'AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8'
+
+GOOGLE_API_KEY = os.getenv("api_key")
 genai.configure(api_key=GOOGLE_API_KEY)
 
 def verify_medicine_with_prescription(prescription_image_path, medicine_image_path):
@@ -24,6 +30,8 @@ def verify_medicine_with_prescription(prescription_image_path, medicine_image_pa
             "Then, look at the medicine packaging in the second image and read its name.",
             "Compare the two names.",
             "respond with either 'Verified' or 'Not Verified' and provide a one-sentence which medicine are verified and explanation for your conclusion.",
+            "respose like medicien name : verified "
+            "finally as per priscription how much medicne is not verified and give the name "
             
             "Prescription Image: ",
             prescription_img,
