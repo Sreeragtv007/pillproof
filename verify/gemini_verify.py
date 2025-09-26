@@ -10,7 +10,7 @@ load_dotenv()
 # GOOGLE_API_KEY = 'AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8'
 
 GOOGLE_API_KEY = os.getenv("api_key")
-genai.configure(api_key=GOOGLE_API_KEY)
+genai.configure(api_key="AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8")
 
 
 def verify_medicine_with_prescription(prescription_image_path, medicine_image_path):

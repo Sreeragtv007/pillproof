@@ -21,11 +21,12 @@ def upload_view(request):
         result = verify_medicine_with_prescription(medicine_path,priscription_path)
         
         context = {"result":result}
+        print(result)
         
         return render(request, 'result.html',context)
     else:
 
-        return render(request, 'upload.html')
+        return render(request, 'upload1.html')
 
 
 def result_view(request):

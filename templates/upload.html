@@ -20,7 +20,7 @@
     </form>
     </div> -->
 
-    <!-- <div class="form-main"> -->
+<!-- <div class="form-main"> -->
 <!-- 
         <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -42,39 +42,35 @@
     
     
 </body>
-</html> --> 
-
-
+</html> -->
 
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prescription Verification Portal</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-    
- 
- {% block results %}
-    
- {% endblock results %}
-    
-        
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    {% block results %} {% endblock results %}
 
     <div class="container">
-        <div class="verify-card">
-            <div class="card-header">
-                <h1>Prescription Verification</h1>
-                <p>Upload the prescription and bill / medicine image</p>
-            </div>
+      <div class="verify-card">
+        <div class="card-header">
+          <h1>Prescription Verification</h1>
+          <p>Upload the prescription and bill / medicine image</p>
+        </div>
 
-            <form class="verify-form" action="" method="post" enctype="multipart/form-data">
+        <!-- <form class="verify-form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="file-upload-group">
                     <label for="prescription-file" class="file-input-label">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
@@ -92,11 +88,103 @@
                 </div>
 
                 <button type="submit" class="submit-btn">Verify Now</button>
-            </form>
-        </div>
+            </form> -->
+
+        <form
+          class="verify-form"
+          action=""
+          method="post"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+
+          <div class="file-upload-group">
+            <label for="prescription-file" class="file-input-label">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
+                ></path>
+                <path d="M12 12v9"></path>
+                <path d="m16 16-4-4-4 4"></path>
+              </svg>
+              <span>Upload Prescription image</span>
+            </label>
+            <input
+              type="file"
+              id="prescription-file"
+              name="priscription"
+              accept="image/*"
+              required
+            />
+            <span class="file-name" id="prescription-name">No file chosen</span>
+          </div>
+
+          <div class="file-upload-group">
+            <label for="signature-file" class="file-input-label">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"
+                ></path>
+                <path d="M12 12v9"></path>
+                <path d="m16 16-4-4-4 4"></path>
+              </svg>
+              <span>Upload Medicine / bill image</span>
+            </label>
+            <input
+              type="file"
+              id="signature-file"
+              name="medicine"
+              accept="image/*"
+              required
+            />
+            <span class="file-name" id="signature-name">No file chosen</span>
+          </div>
+
+          <button type="submit" class="submit-btn">Verify Now</button>
+        </form>
+      </div>
     </div>
 
-    <script src="main.js"></script>
+    <script>
+      // Prescription file
+      document
+        .getElementById("prescription-file")
+        .addEventListener("change", function () {
+          const fileName = this.files.length
+            ? this.files[0].name
+            : "No file chosen";
+          document.getElementById("prescription-name").textContent = fileName;
+        });
 
-</body>
+      // Medicine file
+      document
+        .getElementById("signature-file")
+        .addEventListener("change", function () {
+          const fileName = this.files.length
+            ? this.files[0].name
+            : "No file chosen";
+          document.getElementById("signature-name").textContent = fileName;
+        });
+    </script>
+  </body>
 </html>
