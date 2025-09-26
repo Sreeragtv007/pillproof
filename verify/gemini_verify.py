@@ -30,7 +30,7 @@ def verify_medicine_with_prescription(prescription_image_path, medicine_image_pa
             "Carefully read the prescription in the first image and identify the medicine's name.",
             "Then, look at the medicine packaging in the second image and read its name.",
             "Compare the two names.",
-            "Finally, respond with either 'Verified' or 'Not Verified' and provide a one-sentence explanation for your conclusion.",
+            "Finally, respond with either 'true' if verified or 'false' and provide a one-sentence explanation for your conclusion.",
 
 
 

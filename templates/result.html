@@ -1,31 +1,14 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Verification Result</title>
-    
-</head>
-<body>
-    <h1>Verification Result</h1>
-    
-     <p>{{ result }}</p>
+{% extends 'upload.html' %}
 
-    <br>
-    <h4>**Precaution:** AI can make mistakes. Always double-check if you have doubt </h4>
-    <a href="{% url 'upload_view' %}">Upload another set of images</a>
-</body>
-</html> -->
-
-
-
-
-{% load static %}
-  <html>
-    <head>
-            <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-    </head>
+    {% block results %}
+      
+     {% if true in result %}
 
     <div class="container">
+
+       
+          
+      
 
         <div class="result-card verified">
             <div class="result-icon">
@@ -38,9 +21,14 @@
             </div>
             <hr>
             <a href="/" class="back-btn">Verify Another Prescription</a>
+
+             <h4 class="pre">AI can make mistakes. Always double-check if you have any doubt </h4>
         </div>
 
+      
+
     </div>
+      {% else %}
 
     <div class="container" style="padding-top: 0;"> <div class="result-card not-verified">
             <div class="result-icon">
@@ -56,6 +44,8 @@
         </div>
 
     </div>
-</html>
+
+    {% endblock results %}
+<!-- </html> -->
 
    

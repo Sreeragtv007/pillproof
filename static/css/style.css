@@ -74,6 +74,15 @@ body {
     padding: 1rem;
 }
 
+
+
+.pre{
+    padding: 20px;
+    color: #dc3545;
+    margin: 20px;
+    
+}
+
 /* --- Verification Card --- */
 .verify-card {
     background-color: #fff;
@@ -285,3 +294,5 @@ body {
 .result-card.not-verified h1 {
     color: var(--failure-color);
 }
+
+
