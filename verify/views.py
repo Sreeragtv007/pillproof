@@ -25,6 +25,8 @@ def upload_view(request):
         print('test')
         print(result)
         
+        return HttpResponse(result)
+        
         return render(request, 'result.html',context)
     else:
 

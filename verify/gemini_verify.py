@@ -33,31 +33,17 @@ def verify_medicine_with_prescription(prescription_image_path, medicine_image_pa
     Your goal is to analyze the two images provided: a doctor's prescription and a pharmacy bill. You must verify that the medicines and quantities on the pharmacy bill correctly match what was prescribed.
 
     Perform these steps:
-    1.  Extract all text from both the prescription and the bill images.
+    1.  Extract all text from both the prescription and the bill images or medicine image.
     2.  From the prescription, list all prescribed medicine names and their quantities.
-    3.  From the bill, list all purchased medicine names and their quantities.
+    3.  From the bill or medicine image, list all purchased medicine names and their quantities.
     4.  Compare the two lists to find any discrepancies, such as:
         - Medicines prescribed but not billed.
         - Medicines billed but not prescribed.
         - Mismatches in quantity.
 
     Present your final analysis as a single Python dictionary. The dictionary must have the following exact structure:
-    {
-      "verification_status": "Verified" or "Discrepancy Found",
-      "prescription_medicines": [
-        {"medicine_name": "Medicine A", "quantity": 10},
-        {"medicine_name": "Medicine B", "quantity": 30}
-      ],
-      "billed_medicines": [
-        {"medicine_name": "Medicine A", "quantity": 10},
-        {"medicine_name": "Medicine C", "quantity": 15}
-      ],
-      "discrepancies": {
-        "prescribed_but_not_billed": ["Medicine B"],
-        "billed_but_not_prescribed": ["Medicine C"],
-        "quantity_mismatch": []
-      },
-      "summary": "A brief, human-readable summary of the verification result."
+    only give result as below dictionary format
+    result = {"verified":["medicine name"],"not verified":["medicine name"]}
     }
     """,
 
