@@ -41,10 +41,11 @@ def verify_medicine_with_prescription(prescription_image_path, medicine_image_pa
         - Medicines billed but not prescribed.
         - Mismatches in quantity.
 
-    Present your final analysis as below . The result must have the following exact structure:
-    only give result as below  exact python dictionary format,
+    The result must have the following exact structure,
+    only give result as below format only,
     
-    result = {"verified":["medicine name"],"not":["medicine name"]}
+    verified : medicine name1,medicine name2, ....
+    not verified : medicine name1,medicine name2, ...
     }
     """,
 
