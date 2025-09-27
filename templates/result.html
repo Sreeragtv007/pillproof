@@ -2,7 +2,7 @@
 
     {% block results %}
       
-     {% if "true" in result %}
+     {% if "verified" in result %}
 
     <div class="container">
 
@@ -16,8 +16,8 @@
             </div>
             <h1>Verified Successfully</h1>
             <div class="reason-box">
-                <span class="reason-label">Reason:</span>
-                <span class="reason-code">{{result}}</span>
+                <span class="reason-label">Medicine:</span>
+                <span class="reason-code">{{result.verified}}</span>
             </div>
             <hr>
 
