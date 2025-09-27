@@ -2,7 +2,7 @@
 
     {% block results %}
       
-     {% if true in result %}
+     {% if "true" in result %}
 
     <div class="container">
 
@@ -17,12 +17,13 @@
             <h1>Verified Successfully</h1>
             <div class="reason-box">
                 <span class="reason-label">Reason:</span>
-                <span class="reason-code">MATCHED</span>
+                <span class="reason-code">{{result}}</span>
             </div>
             <hr>
-            <a href="/" class="back-btn">Verify Another Prescription</a>
 
-             <h4 class="pre">AI can make mistakes. Always double-check if you have any doubt </h4>
+            <a href="{% url 'upload_view' %}" class="back-btn">Verify Another Prescription</a>
+
+
         </div>
 
       
@@ -40,7 +41,9 @@
                 <span class="reason-code">MISMATCH</span>
             </div>
             <hr>
-            <a href="/" class="back-btn">Try Again</a>
+            <a href="{% url 'upload_view' %}" class="back-btn">Verify Another Prescription</a>
+            
+             <h4 class="pre">AI can make mistakes. Always double-check if you have any doubt </h4>
         </div>
 
     </div>
