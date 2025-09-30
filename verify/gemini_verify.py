@@ -40,13 +40,13 @@ def verify_medicine_with_prescription(prescription_image, medicine_image):
 After completing your analysis, provide your response in the following format. Do not include any other text or explanation.
 
 **If the verification is successful:**
-Status: Verified
+Verified
 Medicine: [Name of the medicine from the package]
 
 **If the verification fails:**
-Status: Not Verified
-Medicine: [Name of the medicine from the package]
-Reason: [Provide a brief reason, e.g., "Incorrect medicine" or "Dosage mismatch (Prescribed 500mg, got 250mg)"]''',
+
+
+[Provide a brief reason, e.g., "Incorrect medicine" or "Dosage mismatch (Prescribed 500mg, got 250mg)"]''',
 
 
 
