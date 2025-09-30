@@ -1,7 +1,7 @@
 # verifier_app/views.py
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+import PIL
 from .models import PrescriptionVerification
 from .gemini_verify import verify_medicine_with_prescription
 import json
@@ -13,20 +13,18 @@ def upload_view(request):
         priscription = request.FILES['priscription']
         medicine = request.FILES['medicine']
 
-        obj = PrescriptionVerification.objects.create(
-            prescription_image=priscription, medicine_image=medicine)
-
-        medicine_path = obj.medicine_image.path
-        priscription_path = obj.prescription_image.path
+        prescription_img = PIL.Image.open(priscription)
+        medicine_img = PIL.Image.open(medicine)
 
         result = verify_medicine_with_prescription(
-            medicine_path, priscription_path)
+            prescription_img, medicine_img)
 
+        print(type(result))
         print(result)
 
-        context = {}
+        context = {'result': result}
 
-        return render(request, 'result.html', context)
+        return render(request,'result.html',context)
     else:
 
         return render(request, 'upload1.html')

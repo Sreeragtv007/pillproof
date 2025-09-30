@@ -13,47 +13,47 @@ GOOGLE_API_KEY = os.getenv("api_key")
 genai.configure(api_key="AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8")
 
 
-def verify_medicine_with_prescription(prescription_image_path, medicine_image_path):
+def verify_medicine_with_prescription(prescription_image, medicine_image):
 
     try:
-        # --- Load Images ---
-        prescription_img = PIL.Image.open(prescription_image_path)
-        medicine_img = PIL.Image.open(medicine_image_path)
 
         # --- Set Up the Model ---
         # Using the gemini-pro-vision model which can handle image inputs
-        model = genai.GenerativeModel('gemini-2.5-flash')
+        model = genai.GenerativeModel('gemini-2.5-pro')
         # --- Create the Prompt ---
         # The prompt is a list containing text instructions and the images.
         prompt_parts = [
 
-            """
-    You are an intelligent document verification assistant with expertise in processing medical documents using Optical Character Recognition (OCR).
 
-    Your goal is to analyze the two images provided: a doctor's prescription and a pharmacy bill. You must verify that the medicines and quantities on the pharmacy bill correctly match what was prescribed.
+            '''
+            **Context:** You are a highly accurate prescription verification AI. You will receive two images for analysis.
 
-    Perform these steps only to make the below dictionary 
-    1.  Extract all text from both the prescription and the bill images or medicine image.
-    2.  From the prescription, list all prescribed medicine names and their quantities.
-    3.  From the bill or medicine image, list all purchased medicine names and their quantities.
-    4.  Compare the two lists to find any discrepancies, such as:
-        - Medicines prescribed but not billed.
-        - Medicines billed but not prescribed.
-        - Mismatches in quantity.
+**Objective:** Analyze the prescription and the medicine images, perform a step-by-step comparison, and provide a final verification status in a structured format.
 
-    The result must have the following exact structure,
-    only give result as below format only,
-    
-    verified : medicine name1,medicine name2, ....
-    not verified : medicine name1,medicine name2, ...
-    }
-    """,
+**Step-by-Step Instructions:**
+1.  **Analyze Prescription Image:** Carefully read the text on the prescription. Identify and extract the prescribed medicine's name and dosage.
+2.  **Analyze Medicine Image:** Carefully read the text on the medicine's packaging. Identify and extract the brand name, the generic name, and the dosage.
+3.  **Compare:** Compare the extracted information from both images. Check if the generic name of the medicine matches what was prescribed. Also, confirm the dosage matches.
+4.  **Conclude:** Based on the comparison, decide if the medicine is verified or not.
+
+**Final Output Specification:**
+After completing your analysis, provide your response in the following format. Do not include any other text or explanation.
+
+**If the verification is successful:**
+Status: Verified
+Medicine: [Name of the medicine from the package]
+
+**If the verification fails:**
+Status: Not Verified
+Medicine: [Name of the medicine from the package]
+Reason: [Provide a brief reason, e.g., "Incorrect medicine" or "Dosage mismatch (Prescribed 500mg, got 250mg)"]''',
+
 
 
             "Prescription Image: ",
-            prescription_img,
+            prescription_image,
             "\nMedicine Image: ",
-            medicine_img,
+            medicine_image,
         ]
 
         # --- Make the API Call ---
