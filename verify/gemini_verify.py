@@ -10,10 +10,10 @@ load_dotenv()
 # GOOGLE_API_KEY = 'AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8'
 
 GOOGLE_API_KEY = os.getenv("api_key")
-genai.configure(api_key="AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8")
+genai.configure(api_key="AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i81")
 
 
-def verify_medicine_with_prescription(prescription_image, medicine_image):
+def verify_medicine_with_prescription(prescription_image, text):
 
     try:
 
@@ -26,14 +26,14 @@ def verify_medicine_with_prescription(prescription_image, medicine_image):
 
 
             '''
-            **Context:** You are a highly accurate prescription verification AI. You will receive two images for analysis.
+            **Context:** You are a highly accurate prescription verification AI. You will receive one image and text of the medicine for analysis.
 
-**Objective:** Analyze the prescription and the medicine images, perform a step-by-step comparison, and provide a final verification status in a structured format.
+**Objective:** Analyze the prescription and the medicine text, perform a step-by-step comparison, and provide a final verification status in a structured format.
 
 **Step-by-Step Instructions:**
 1.  **Analyze Prescription Image:** Carefully read the text on the prescription. Identify and extract the prescribed medicine's name and dosage.
-2.  **Analyze Medicine Image:** Carefully read the text on the medicine's packaging. Identify and extract the brand name, the generic name, and the dosage.
-3.  **Compare:** Compare the extracted information from both images. Check if the generic name of the medicine matches what was prescribed. Also, confirm the dosage matches.
+2.  **Analyze Medicine ocr text :** Carefully read the text given. Identify and extract the brand name, the generic name, and the dosage.
+3.  **Compare:** Compare the extracted information from image and text. Check if the medicine name of the medicine matches what was prescribed. Also, confirm the dosage matches.
 4.  **Conclude:** Based on the comparison, decide if the medicine is verified or not.
 
 **Final Output Specification:**
@@ -52,30 +52,16 @@ Medicine: [Name of the medicine from the package]
 
             "Prescription Image: ",
             prescription_image,
-            "\nMedicine Image: ",
-            medicine_image,
+            "\nMedicine text: ", text
+            # medicine_image,
         ]
 
         # --- Make the API Call ---
         response = model.generate_content(prompt_parts)
 
-        return response.text
+        return response
 
-    except FileNotFoundError:
-        return "Error: One or both image files were not found. Please check the file paths."
-    except Exception as e:
-        return f"An error occurred: {e}"
+    except Exception:
+        return False
 
-    """
-    
-     "You are a pharmacy assistant. Your task is to verify if the medicine in the second image matches the medicine name written in the first image, which is a prescription.",
-            "Carefully read the prescription in the first image and identify the medicine's name.",
-            "Then, look at the medicine packaging in the second image and read its name.",
-            "Compare the two names.",
-            "Finally, respond with either 'true' if verified or 'false' and provide a one-sentence valid explanation for your conclusion.",
-
-
-
-    
-    
-    """
+  
