@@ -10,7 +10,7 @@ load_dotenv()
 # GOOGLE_API_KEY = 'AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8'
 
 GOOGLE_API_KEY = os.getenv("api_key")
-genai.configure(api_key="AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i81")
+genai.configure(api_key="AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8")
 
 
 def verify_medicine_with_prescription(prescription_image, text):
@@ -46,7 +46,7 @@ Medicine: [Name of the medicine from the package]
 **If the verification fails:**
 
 
-[Provide a brief reason, e.g., "Incorrect medicine" or "Dosage mismatch (Prescribed 500mg, got 250mg)"]''',
+[Provide a brief reason, e.g., " medicine mismatch"]''',
 
 
 
@@ -59,7 +59,7 @@ Medicine: [Name of the medicine from the package]
         # --- Make the API Call ---
         response = model.generate_content(prompt_parts)
 
-        return response
+        return response.text
 
     except Exception:
         return False

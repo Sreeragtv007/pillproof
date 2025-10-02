@@ -4,7 +4,6 @@ import PIL
 from .gemini_verify import verify_medicine_with_prescription
 from datetime import datetime
 import pytesseract
-from django.contrib import messages
 
 
 def upload_view(request):
@@ -21,7 +20,8 @@ def upload_view(request):
 
             text = pytesseract.image_to_string(medicine_img)
         except:
-            messages.error(request,"un expected error while usign ocr")
+            context ={"result":"unexpected error from ocr"}
+            return render(request,'result.html',context)
 
         result = verify_medicine_with_prescription(
             prescription_img, text)
@@ -30,7 +30,7 @@ def upload_view(request):
         print(result)
         
         if result == False:
-            context ={"result":"unexpected error"}
+            context ={"result":"unexpected error form api"}
             return render(request,'result.html',context)
             
 
