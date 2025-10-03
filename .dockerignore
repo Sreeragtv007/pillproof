@@ -1,0 +1,28 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Python virtual environment
+.venv
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Database file (if using SQLite for local dev)
+db.sqlite3
+*.sqlite3
+
+# Media and Static files (if you handle them separately)
+/media/
+
+
+# IDE files
+.idea/
+.vscode/

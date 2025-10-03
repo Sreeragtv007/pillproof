@@ -1,63 +1,71 @@
-{% extends 'upload.html' %}
+{% extends 'upload.html' %} {% block results %} {% if "Verified" in result %}
 
-    {% block results %}
-
-
-    
-      
-     {% if "Verified" in result %}
-     
-       
-    
-
-    <div class="container">
-
-       
-          
-      
-
-        <div class="result-card verified">
-            <div class="result-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            </div>
-            <h1>Verified Successfully</h1>
-            <div class="reason-box">
-                <span class="reason-code">{{result}}</span>
-            </div>
-            <hr>
-
-            <a href="{% url 'upload_view' %}" class="back-btn">Verify Another Prescription</a>
-
-            <h4 class="pre">AI can make mistakes. Always double-check if you have any doubt </h4>
-
-
-        </div>
-
-      
-
+<div class="container">
+  <div class="result-card verified">
+    <div class="result-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
     </div>
-      {% else %}
-
-    <div class="container" style="padding-top: 0;"> <div class="result-card not-verified">
-            <div class="result-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </div>
-            <h1>Verification Failed</h1>
-             <div class="reason-box">
-                <span class="reason-code">{{result}}</span>
-            </div>
-            
-            <hr>
-            <a href="{% url 'upload_view' %}" class="back-btn">Verify Another Prescription</a>
-            
-             <h4 class="pre">AI can make mistakes. Always double-check if you have any doubt </h4>
-        </div>
-
+    <h1>Verified Successfully</h1>
+    <div class="reason-box">
+      <span class="reason-code">{{result}}</span>
     </div>
-      
-    {% endif %}
+    <hr />
 
-    {% endblock results %}
+    <a href="{% url 'upload_view' %}" class="back-btn"
+      >Verify Another Prescription</a
+    >
 
+    <h4 class="pre">
+      AI can make mistakes. Always double-check if you have any doubt
+    </h4>
+  </div>
+</div>
+{% else %}
 
-   
+<div class="container" style="padding-top: 0">
+  <div class="result-card not-verified">
+    <div class="result-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
+    <h1>Verification Failed</h1>
+    <div class="reason-box">
+      <span class="reason-code">{{result}}</span>
+    </div>
+
+    <hr />
+    <a href="{% url 'upload_view' %}" class="back-btn"
+      >Verify Another Prescription</a
+    >
+
+    <h4 class="pre">
+      AI can make mistakes. Always double-check if you have any doubt
+    </h4>
+  </div>
+</div>
+
+{% endif %} {% endblock results %}
