@@ -36,4 +36,6 @@ EXPOSE 8000
 # 8. Command to Run the Application
 # The '0.0.0.0' is crucial to make the server accessible from outside the container.
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Add this line before the CMD instruction
+RUN python manage.py collectstatic --noinput
 CMD ["gunicorn", "pillproof.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
