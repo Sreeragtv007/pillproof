@@ -7,10 +7,10 @@ from dotenv import load_dotenv
 # --- Configuration ---
 # Replace with your actual API key
 load_dotenv()
-# GOOGLE_API_KEY = 'AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8'
+
 
 GOOGLE_API_KEY = os.getenv("api_key")
-genai.configure(api_key="AIzaSyChINg613sQ9p9vNUshJmtATTYqolT52i8")
+genai.configure(api_key="")   # REPLACE GEMINI API KEY HERE
 
 
 def verify_medicine_with_prescription(prescription_image, text):
